@@ -228,10 +228,34 @@
         .law li {
             margin-bottom: 8px;
         }
+
+        .language-switcher {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .language-switcher a {
+            color: var(--red-accent);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 2px solid var(--red-accent);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher a:hover {
+            background: var(--red-accent);
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="language-switcher">
+            <a href="/es/">🇪🇸 Español</a>
+        </div>
+
         <h1>48 Laws of Psychology</h1>
 
         <div class="metadata">
