@@ -248,6 +248,55 @@
             background: var(--red-accent);
             color: white;
         }
+
+        .changelog {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .changelog h3 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .changelog ul {
+            margin: 0;
+            padding-left: 25px;
+        }
+
+        .changelog li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .changelog .version {
+            font-weight: 700;
+            color: var(--red-accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            border-top: 2px solid rgba(26, 43, 74, 0.1);
+            color: var(--navy);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .copyright a {
+            color: var(--red-accent);
+            text-decoration: none;
+        }
+
+        .copyright a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -261,7 +310,15 @@
         <div class="metadata">
             <span class="author">Autor: Joey Bream</span>
             <span class="separator">•</span>
-            <span class="updated">Última actualización: 30 de diciembre de 2025</span>
+            <span class="updated">Última actualización: 1 de enero de 2026</span>
+        </div>
+
+        <div class="changelog">
+            <h3>📝 Registro de Cambios</h3>
+            <ul>
+                <li><span class="version">v1.1.0</span> (1 ene 2026) - Traducción al español, selector de idioma y Vercel Analytics añadidos</li>
+                <li><span class="version">v1.0.0</span> (30 dic 2025) - Lanzamiento inicial con las 48 leyes</li>
+            </ul>
         </div>
 
         <hr>
@@ -953,6 +1010,11 @@
         </div>
 
         <div class="end-mark">Fin de las 48 Leyes</div>
+
+        <div class="copyright">
+            <p>&copy; 2025-2026 Joey Bream. Todos los derechos reservados.</p>
+            <p>Solo para uso educativo y personal.</p>
+        </div>
 
     </div>
     <script type="module">
