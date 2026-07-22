@@ -297,6 +297,213 @@
         .copyright a:hover {
             text-decoration: underline;
         }
+        /* Flash card mode */
+        .mode-switcher {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .flashcard-toggle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--cream);
+            background: var(--navy);
+            border: 2px solid var(--navy);
+            border-radius: 4px;
+            padding: 12px 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .flashcard-toggle:hover {
+            background: var(--red-accent);
+            border-color: var(--red-accent);
+        }
+
+        .flashcard-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--pale-bg) 0%, var(--cream) 100%);
+            padding: 30px 20px;
+            overflow-y: auto;
+        }
+
+        .flashcard-overlay.open {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flashcard-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--navy);
+            cursor: pointer;
+            line-height: 1;
+            padding: 8px;
+        }
+
+        .flashcard-close:hover {
+            color: var(--red-accent);
+        }
+
+        .flashcard-stage {
+            perspective: 1600px;
+            width: 100%;
+            max-width: 620px;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            min-height: 440px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 2px;
+            box-shadow: 0 20px 60px rgba(26, 43, 74, 0.18);
+            padding: 45px 40px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .flashcard-face--front {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-top: 6px solid var(--red-accent);
+        }
+
+        .flashcard-face--back {
+            transform: rotateY(180deg);
+            border-top: 6px solid var(--gold);
+        }
+
+        .flashcard-number {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            color: var(--red-accent);
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .flashcard-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--navy);
+        }
+
+        .flashcard-hint {
+            margin-top: 28px;
+            font-size: 0.85rem;
+            font-style: italic;
+            opacity: 0.55;
+        }
+
+        .flashcard-block {
+            margin-bottom: 24px;
+        }
+
+        .flashcard-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .flashcard-label {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red-accent);
+            margin-bottom: 8px;
+        }
+
+        .flashcard-block p {
+            margin: 0;
+            text-align: left;
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .flashcard-block--headline p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+
+        .flashcard-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .flashcard-controls button {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.9rem;
+            color: var(--navy);
+            background: transparent;
+            border: 2px solid var(--navy);
+            border-radius: 4px;
+            padding: 9px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .flashcard-controls button:hover {
+            background: var(--navy);
+            color: var(--cream);
+        }
+
+        .flashcard-counter {
+            font-style: italic;
+            font-size: 0.9rem;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .flashcard {
+                min-height: 480px;
+            }
+
+            .flashcard-face {
+                padding: 35px 25px;
+            }
+
+            .flashcard-name {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -310,12 +517,17 @@
         <div class="metadata">
             <span class="author">Autor: Joey Bream</span>
             <span class="separator">•</span>
-            <span class="updated">Última actualización: 1 de enero de 2026</span>
+            <span class="updated">Última actualización: 22 de julio de 2026</span>
+        </div>
+
+        <div class="mode-switcher">
+            <button type="button" class="flashcard-toggle" id="flashcardToggle">🎴 Tarjetas</button>
         </div>
 
         <div class="changelog">
             <h3>📝 Registro de Cambios</h3>
             <ul>
+                <li><span class="version">v1.2.0</span> (22 jul 2026) - Modo tarjetas de memoria para autoevaluarte en las 48 leyes</li>
                 <li><span class="version">v1.1.0</span> (1 ene 2026) - Traducción al español, selector de idioma y Vercel Analytics añadidos</li>
                 <li><span class="version">v1.0.0</span> (30 dic 2025) - Lanzamiento inicial con las 48 leyes</li>
             </ul>
@@ -1017,6 +1229,170 @@
         </div>
 
     </div>
+    <div class="flashcard-overlay" id="flashcardOverlay" role="dialog" aria-modal="true" aria-label="Tarjetas de memoria">
+        <button type="button" class="flashcard-close" id="flashcardClose" aria-label="Cerrar tarjetas">✕</button>
+        <div class="flashcard-stage">
+            <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Girar tarjeta">
+                <div class="flashcard-face flashcard-face--front">
+                    <span class="flashcard-number" id="flashcardNumber"></span>
+                    <span class="flashcard-name" id="flashcardName"></span>
+                    <span class="flashcard-hint">Haz clic para revelar</span>
+                </div>
+                <div class="flashcard-face flashcard-face--back" id="flashcardBack"></div>
+            </div>
+        </div>
+        <div class="flashcard-controls">
+            <button type="button" id="flashcardPrev">← Anterior</button>
+            <span class="flashcard-counter" id="flashcardCounter"></span>
+            <button type="button" id="flashcardNext">Siguiente →</button>
+            <button type="button" id="flashcardShuffle">Mezclar</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const STRINGS = {
+                number: 'Número',
+                headline: 'En una línea',
+                evidence: 'Evidencia',
+                test: 'Ponte a prueba',
+                counter: (i, n) => `${i} de ${n}`
+            };
+
+            // Cards are derived from the laws already on the page, so the two
+            // stay in sync automatically when a law is edited.
+            const cards = Array.from(document.querySelectorAll('.law')).map(law => {
+                const heading = law.querySelector('h3');
+                const tagline = heading.querySelector('em');
+                const title = heading.firstChild.textContent.trim();
+                const match = title.match(/^(\d+)\.\s*(.*)$/);
+
+                const firstPara = law.querySelector('p');
+                const lead = firstPara.querySelector('strong');
+                let evidence = firstPara.textContent.trim();
+                if (lead) {
+                    evidence = evidence.slice(lead.textContent.trim().length).trim();
+                }
+
+                const firstBullet = law.querySelector('ul li');
+
+                return {
+                    number: match ? match[1] : '',
+                    name: match ? match[2] : title,
+                    headline: tagline ? tagline.textContent.trim() : '',
+                    evidence: evidence,
+                    test: firstBullet ? firstBullet.textContent.trim() : ''
+                };
+            });
+
+            if (!cards.length) return;
+
+            const overlay = document.getElementById('flashcardOverlay');
+            const card = document.getElementById('flashcard');
+            const numberEl = document.getElementById('flashcardNumber');
+            const nameEl = document.getElementById('flashcardName');
+            const backEl = document.getElementById('flashcardBack');
+            const counterEl = document.getElementById('flashcardCounter');
+
+            let order = cards.map((_, i) => i);
+            let position = 0;
+
+            // Card content lives in a wrapper we can measure: the faces themselves are
+            // stretched to the card, so they can't report how tall the content wants to be.
+            const inner = document.createElement('div');
+            backEl.appendChild(inner);
+
+            function block(label, text) {
+                if (!text) return '';
+                const p = document.createElement('p');
+                p.textContent = text;
+                const cls = label === STRINGS.headline
+                    ? 'flashcard-block flashcard-block--headline'
+                    : 'flashcard-block';
+                return `<div class="${cls}"><span class="flashcard-label">${label}</span>${p.outerHTML}</div>`;
+            }
+
+            function render() {
+                const item = cards[order[position]];
+                card.classList.remove('flipped');
+                numberEl.textContent = `${STRINGS.number} ${item.number}`;
+                nameEl.textContent = item.name;
+                inner.innerHTML =
+                    block(STRINGS.headline, item.headline) +
+                    block(STRINGS.evidence, item.evidence) +
+                    block(STRINGS.test, item.test);
+                counterEl.textContent = STRINGS.counter(position + 1, order.length);
+                fitToContent();
+            }
+
+            // Faces are absolutely positioned for the 3D flip, so the card needs an
+            // explicit height — grow it to fit the content rather than clipping it.
+            // CSS min-height still sets the floor for short cards.
+            function fitToContent() {
+                const styles = getComputedStyle(backEl);
+                const chrome = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom)
+                    + parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth);
+                card.style.height = (inner.offsetHeight + chrome) + 'px';
+            }
+
+            // Re-fit whenever the content reflows — late-loading web fonts, resizes.
+            if (typeof ResizeObserver !== 'undefined') {
+                new ResizeObserver(fitToContent).observe(inner);
+            }
+
+            function step(delta) {
+                position = (position + delta + order.length) % order.length;
+                render();
+            }
+
+            function open() {
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                render();
+                card.focus();
+            }
+
+            function close() {
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            document.getElementById('flashcardToggle').addEventListener('click', open);
+            document.getElementById('flashcardClose').addEventListener('click', close);
+            document.getElementById('flashcardPrev').addEventListener('click', () => step(-1));
+            document.getElementById('flashcardNext').addEventListener('click', () => step(1));
+
+            document.getElementById('flashcardShuffle').addEventListener('click', () => {
+                for (let i = order.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [order[i], order[j]] = [order[j], order[i]];
+                }
+                position = 0;
+                render();
+            });
+
+            card.addEventListener('click', () => card.classList.toggle('flipped'));
+
+            card.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    card.classList.toggle('flipped');
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (overlay.classList.contains('open')) fitToContent();
+            });
+
+            document.addEventListener('keydown', event => {
+                if (!overlay.classList.contains('open')) return;
+                if (event.key === 'Escape') close();
+                if (event.key === 'ArrowLeft') step(-1);
+                if (event.key === 'ArrowRight') step(1);
+            });
+        })();
+    </script>
+
     <script type="module">
         import { inject } from '@vercel/analytics';
         inject();
